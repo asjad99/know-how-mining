@@ -1,13 +1,8 @@
-
-
 ## INTRODUCTION: 
 Most data mining techniques focus on extracting declarative knowledge, which describes objects and events by specifying the properties which characterize them; it does not pay attention to extract the actions needed to obtain a result, but only on its properties ‘Many knowledge bases such as Wikipedia or Wikidata that have been widely utilized contain a huge amount of descriptive knowledge.  Procedural knowledge [2, 18], also known as know-how, is the knowledge exercised in the accomplishment of a task, i.e. how to do things, which is usually acquired by experience and considered tacit and not easily shared, compared to descriptive knowledge.  However, shared explicit procedural knowledge lays a foundation for efficiently coordinated action, which is often referred to as best practices or business rules within communities or organizations.’
 
-
-After the model has been trained, every word in the training corpus has been
-assigned a unique vector. But this assigned isn’t random. If we visualize
-the vectors in space using something likeT-SNE we’ll find out that words
-that are semantically similar have been projected nearby(are close to each
+After the model has been trained, every word in the training corpus has been assigned a unique vector. But this assigned isn’t random. If we visualize
+the vectors in space using something likeT-SNE we’ll find out that words that are semantically similar have been projected nearby(are close to each
 other). 
 
 "Vector space models (VSMs) represent (embed) words in a continuous vector space where semantically similar words are mapped to nearby points ('are embedded nearby each other'). VSMs have a long, rich history in NLP, but all methods depend in some way or another on theDistributional Hypothesis, which states that words that appear in the same contexts share semantic meaning. The different approaches that leverage this principle can be divided into two categories: count-based methods (e.g. Latent Semantic Analysis), and predictive methods (e.g.neural probabilistic language models)." 
@@ -44,31 +39,42 @@ Type the phrase2: i bake food
 ###############################################################
 Similarity Score:  1.0
 ###############################################################
+
+----
+
 Type the phrase1: make cake batter
 Type the phrase2: make cake mix
 ###############################################################
 Similarity Score:  0.730352
+
+----
 
 Type the phrase1: Human machine interface for lab abc computer applications
 Type the phrase2: Human computer interaction
 ###############################################################
 Similarity Score:  0.676366
 
+----
+
+
 The above result is remarkable in a sense that our model has learned in an
 unsupervised way that 'human machine interface' phrase is semantically very
 close to the second phrase and that there is nothing common between 'pigs
 fly' and me liking cricket.
 
- Type the phrase1: i like cricket
- Type the phrase2: pigs fly
- ###############################################################
+----
+
+Type the phrase1: i like cricket
+Type the phrase2: pigs fly
+###############################################################
 Similarity Score:  0.146697
- ###############################################################
+###############################################################
+
+----
 
 The score of the first result could have been better if we used some other
 training corpus. so we can say that there is a limitation that comes with
 the kind of training corpus we use... for example our model might not know
- much about the vocabulary/jargon used in software domain. e.g
-
+much about the vocabulary/jargon used in software domain. e.g
 
 ----------
