@@ -1,5 +1,6 @@
-# know-how-mining
 
+
+## INTRODUCTION: 
 Most data mining techniques focus on extracting declarative knowledge, which describes objects and events by specifying the properties which characterize them; it does not pay attention to extract the actions needed to obtain a result, but only on its properties ‘Many knowledge bases such as Wikipedia or Wikidata that have been widely utilized contain a huge amount of descriptive knowledge.  Procedural knowledge [2, 18], also known as know-how, is the knowledge exercised in the accomplishment of a task, i.e. how to do things, which is usually acquired by experience and considered tacit and not easily shared, compared to descriptive knowledge.  However, shared explicit procedural knowledge lays a foundation for efficiently coordinated action, which is often referred to as best practices or business rules within communities or organizations.’
 
 
@@ -11,6 +12,8 @@ other).
 
 "Vector space models (VSMs) represent (embed) words in a continuous vector space where semantically similar words are mapped to nearby points ('are embedded nearby each other'). VSMs have a long, rich history in NLP, but all methods depend in some way or another on theDistributional Hypothesis, which states that words that appear in the same contexts share semantic meaning. The different approaches that leverage this principle can be divided into two categories: count-based methods (e.g. Latent Semantic Analysis), and predictive methods (e.g.neural probabilistic language models)." 
 
+
+## TESTING 
 After training the model(or loading a pretrained one), we can input a
 certain word and the model will give us back its vector(which is a 300
 dimensional 1d array in this case)
