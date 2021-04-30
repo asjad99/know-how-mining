@@ -13,13 +13,9 @@ see paper for more details:
 
 ### Evaluation:  
 
-For evaluation we rely on Google’s pre-trained word2vec model which they have publicly made available[2]. It includes word vectors for a vocabulary of 3 million words and phrases that has been trained on approximately 100 billion words from a Google News dataset.  
-
- 
+For evaluation we usedGoogle’s pre-trained word2vec model which they have publicly made available[2]. It includes word vectors for a vocabulary of 3 million words and phrases that has been trained on approximately 100 billion words from a Google News dataset.  
 
 We ran our program on a large amazon EC2 instance with 16GB RAM using 64-Bit Python. For querying the model, our program first loads the 3.6 GB pre-trained model in memory using the word2vec module of the Gensim Library[1]. Then given two input phrases it computes the average vector for both and calculates the cosine similarity between the two phrase vectors. Common English words(stop words) are removed during the similarity calculation.  
-
- 
 
 ## Results: 
 | Sub-Goal Text                                                   | Sub-Goal (Alternative Text)                                                  | Similarity Score |
@@ -34,8 +30,9 @@ We ran our program on a large amazon EC2 instance with 16GB RAM using 64-Bit Pyt
 | log labor hours for billing                                     | Track technician time for charging the customer                              | 0.469291         |
 | Change issue status to ‘fixed’                                  | update issue status to ‘ready to review’                                     | 0.819758         |
 
+The Word2Vec metric tends to place two words close to each other if they are semantically similar. In the results table we can see that 'Print repair receipt for the customer' and 'Print customer service repair order' have a high similarity score even though the phrases use different vocabulary to explain the same sub-goal. The notion of similarity used here is just cosine distance, which is to say, dot product of vectors. It’s closer to 1 if the phrases are semantically similar and for two completely disimilar phrases, the similarity is pretty close to 0. e.g 'update issue status to ‘in repair’ and 'dissemble the phone components' refer to two different goals and are very far apart semantically. In some cases like 'log labor hours for billing' and 'Track technician time for charging the customer' the score is neither too high nor too low. We can use a certain threhold e.g (0.60) to filter cases where we not fully confident of match.    
 
-references:  
+### references:  
 
 [1] Radim Rehurek, Petr Sojka, 2010, ‘Software framework for topic modelling with large corpora’, ‘THE LREC 2010 WORKSHOP ON NEW CHALLENGES FOR NLP FRAMEWORKS’. University of Malta.  
 
