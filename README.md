@@ -2,13 +2,14 @@
 
 Goal models play an important role by providing a hierarchic representation of stakeholder intent, and by providing a representation of lower-level subgoals that must be achieved to enable the achievement of higher-level goals. A goal model can be viewed as a composition of a number of goal refinement patterns that relate parent goals to subgoals. In this paper, we offer a means for mining these patterns from enterprise event logs and a technique to leverage vector representations of words and phrases to compose these patterns to obtain complete goal models. The resulting machinery can be quiote powerful in its ability to mine know-how or constitutive norms. We offer an empirical evaluation using both real-life and synthetic datasets.
 
-## Approach(text-similatity): 
-
-Most modern methods in statistical NLP are built on the idea of distributional hypothesis which states that any two words will share same semantic meaning if they appear in the same context. Two popular approaches that leverage this principle are count-based methods such as Latent Semantic Analysis and predictive methods. e.g neural probabilistic language models. Predictive models try to directly predict a word(e.g ‘mat’) from its context words(e.g “the cat sits on the”). The words are represented as fixed n-dimensional dense vectors and can be considered as parameters of the model. Word2vec proposed by Mikolov et al. 2013 is a computationally-efficient predictive model for learning word embeddings(vector representation of words) using which we can, from a given raw text corpus, learn a representation which encodes syntactic as well semantic relationships between words. If we visualize the learned vectors it is clear that semantically similar words are in fact projected close to each other in vector space.  
-
 see paper for more details: 
 
 > Santiputri, Metta, et al. "Mining goal refinement patterns: distilling know-how from data." International Conference on Conceptual Modeling. Springer, Cham, 2017.
+
+
+## Approach(text-similatity): 
+
+Most modern methods in statistical NLP are built on the idea of distributional hypothesis which states that any two words will share same semantic meaning if they appear in the same context. Two popular approaches that leverage this principle are count-based methods such as Latent Semantic Analysis and predictive methods. e.g neural probabilistic language models. Predictive models try to directly predict a word(e.g ‘mat’) from its context words(e.g “the cat sits on the”). The words are represented as fixed n-dimensional dense vectors and can be considered as parameters of the model. Word2vec proposed by Mikolov et al. 2013 is a computationally-efficient predictive model for learning word embeddings(vector representation of words) using which we can, from a given raw text corpus, learn a representation which encodes syntactic as well semantic relationships between words. If we visualize the learned vectors it is clear that semantically similar words are in fact projected close to each other in vector space.  
 
 
 ### Evaluation:  
