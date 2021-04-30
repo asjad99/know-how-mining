@@ -34,3 +34,11 @@ We ran our program on a large amazon EC2 instance with 16GB RAM using 64-Bit Pyt
 | log labor hours for billing                                     | Track technician time for charging the customer                              | 0.469291         |
 | Change issue status to ‘fixed’                                  | update issue status to ‘ready to review’                                     | 0.819758         |
 
+
+references:  
+
+[1] Radim Rehurek, Petr Sojka, 2010, ‘Software framework for topic modelling with large corpora’, ‘THE LREC 2010 WORKSHOP ON NEW CHALLENGES FOR NLP FRAMEWORKS’. University of Malta.  
+
+[2] https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit 
+
+[3] Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean. Efficient estimation of word representations in vector space. ICLR Workshop, 2013. 
