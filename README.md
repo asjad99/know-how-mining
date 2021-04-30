@@ -1,80 +1,32 @@
-## INTRODUCTION: 
-Most data mining techniques focus on extracting declarative knowledge, which describes objects and events by specifying the properties which characterize them; it does not pay attention to extract the actions needed to obtain a result, but only on its properties ‘Many knowledge bases such as Wikipedia or Wikidata that have been widely utilized contain a huge amount of descriptive knowledge.  Procedural knowledge [2, 18], also known as know-how, is the knowledge exercised in the accomplishment of a task, i.e. how to do things, which is usually acquired by experience and considered tacit and not easily shared, compared to descriptive knowledge.  However, shared explicit procedural knowledge lays a foundation for efficiently coordinated action, which is often referred to as best practices or business rules within communities or organizations.’
+## About: 
 
-After the model has been trained, every word in the training corpus has been assigned a unique vector. But this assigned isn’t random. If we visualize
-the vectors in space using something likeT-SNE we’ll find out that words that are semantically similar have been projected nearby(are close to each
-other). 
+Most modern methods in statistical NLP are built on the idea of distributional hypothesis which states that any two words will share same semantic meaning if they appear in the same context. Two popular approaches that leverage this principle are count-based methods such as Latent Semantic Analysis and predictive methods. e.g neural probabilistic language models. Predictive models try to directly predict a word(e.g ‘mat’) from its context words(e.g “the cat sits on the”). The words are represented as fixed n-dimensional dense vectors and can be considered as parameters of the model. Word2vec proposed by Mikolov et al. 2013 is a computationally-efficient predictive model for learning word embeddings(vector representation of words) using which we can, from a given raw text corpus, learn a representation which encodes syntactic as well semantic relationships between words. If we visualize the learned vectors it is clear that semantically similar words are in fact projected close to each other in vector space.  
 
-"Vector space models (VSMs) represent (embed) words in a continuous vector space where semantically similar words are mapped to nearby points ('are embedded nearby each other'). VSMs have a long, rich history in NLP, but all methods depend in some way or another on theDistributional Hypothesis, which states that words that appear in the same contexts share semantic meaning. The different approaches that leverage this principle can be divided into two categories: count-based methods (e.g. Latent Semantic Analysis), and predictive methods (e.g.neural probabilistic language models)." 
+see paper for more details: 
 
-
-## TESTING 
-After training the model(or loading a pretrained one), we can input a
-certain word and the model will give us back its vector(which is a 300
-dimensional 1d array in this case)
->
->  model.wv['computer']  # numpy vector of a word
-> array([-0.00449447, -0.00310097,  0.02421786, ...], dtype=float32)
-
->     3.  Further gensim provides us with various functions that can be used
-> to query the model. so for example we can find out the semantic similarity
-> between two words.
-
->>>> model.wv.similarity('woman', 'man')
-> 0.73723527
-
-0.73 shows the similarity score(usually the score is based on the cosine of
-the angle between their vectors).
-
-computing similarity between phrases is slightly harder using word2vec,as in
-its not designed to handle phrases(there is doc2vec for that..), but there
-are hacks that can get us decent results. i found a script on the internet
-that computes an average vector of a given phrase and then we can do the
-same for the second phrase and then compare the two in a similar fashion.
-
-e.g
-
-Type the phrase1: i bake food
-Type the phrase2: i bake food
-###############################################################
-Similarity Score:  1.0
-###############################################################
-
-----
-
-Type the phrase1: make cake batter
-Type the phrase2: make cake mix
-###############################################################
-Similarity Score:  0.730352
-
-----
-
-Type the phrase1: Human machine interface for lab abc computer applications
-Type the phrase2: Human computer interaction
-###############################################################
-Similarity Score:  0.676366
-
-----
+> Santiputri, Metta, et al. "Mining goal refinement patterns: distilling know-how from data." International Conference on Conceptual Modeling. Springer, Cham, 2017.
 
 
-The above result is remarkable in a sense that our model has learned in an
-unsupervised way that 'human machine interface' phrase is semantically very
-close to the second phrase and that there is nothing common between 'pigs
-fly' and me liking cricket.
+### Evaluation:  
 
-----
+For evaluation we rely on Google’s pre-trained word2vec model which they have publicly made available[2]. It includes word vectors for a vocabulary of 3 million words and phrases that has been trained on approximately 100 billion words from a Google News dataset.  
 
-Type the phrase1: i like cricket
-Type the phrase2: pigs fly
-###############################################################
-Similarity Score:  0.146697
-###############################################################
+ 
 
-----
+We ran our program on a large amazon EC2 instance with 16GB RAM using 64-Bit Python. For querying the model, our program first loads the 3.6 GB pre-trained model in memory using the word2vec module of the Gensim Library[1]. Then given two input phrases it computes the average vector for both and calculates the cosine similarity between the two phrase vectors. Common English words(stop words) are removed during the similarity calculation.  
 
-The score of the first result could have been better if we used some other
-training corpus. so we can say that there is a limitation that comes with
-the kind of training corpus we use... for example our model might not know
-much about the vocabulary/jargon used in software domain. e.g
+ 
 
-----------
+## Results: 
+| Sub-Goal Text                                                   | Sub-Goal (Alternative Text)                                                  | Similarity Score |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------- |
+| create new customer service ticket                              | open new repair issue for the customer                                       | 0.623894         |
+| Print repair receipt for the customer                           | Print customer service repair order                                          | 0.863028         |
+| Send out courtesy product check-in confirmation email           | Email repair order confirmation                                              | 0.742585         |
+| perform a series of standard diagnostic tests to identify fault | troubleshoot the problem by following a step-by-step testing methodology     | 0.635703         |
+| Assign a label to the issue after defect assessment             | specify fault type by adding a tag to the issue after diagnosing the problem | 0.637491         |
+| Seek Customer approval for complex repairs                      | Ask permission from customer if a part replacement is required               | 0.640503         |
+| Order replacement parts if repair type is complex               | Send out replacement request for new components                              | 0.645564         |
+| log labor hours for billing                                     | Track technician time for charging the customer                              | 0.469291         |
+| Change issue status to ‘fixed’                                  | update issue status to ‘ready to review’                                     | 0.819758         |
+
